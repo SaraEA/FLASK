@@ -1,0 +1,34 @@
+from flask import Flask
+import random
+import os
+
+facts_list = ["Elon Musk afirma que las redes sociales están diseñadas para mantenernos dentro de la plataforma, de modo que pasemos el mayor tiempo posible viendo contenidos.", 
+
+            "Según un estudio realizado en 2018, más del 50% de las personas de entre 18 y 34 años se consideran dependientes de sus smartphones.", 
+
+            "Las redes sociales tienen aspectos positivos y negativos, y debemos ser conscientes de ambos cuando utilicemos estas plataformas.", 
+
+            "El estudio de la dependencia tecnológica es una de las áreas más relevantes de la investigación científica moderna."]
+
+password = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+passwordsave = ""
+for i in range(8):
+    passwordsave += random.choice(password)
+
+print(passwordsave)
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return '<h1>Hello, World!</h1><a href="/random">¡Ver un hecho al azar!</a>'
+
+@app.route("/random")
+def factores():
+    return f'<p>{random.choice(facts_list)}</p><a href="/">Volver</a><br><a href= "/omg">Generar contraseña</a><br><a href= "/duck">Mostrar imagen aleatoria de patos</a>'
+
+@app.route("/omg")
+def mostrarImg():
+    return f'<p>{passwordsave}</p>'
+
+app.run(debug=True)
